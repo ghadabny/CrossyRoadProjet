@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &625082054752818748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1618916016277815056}
+  - component: {fileID: 8848028560335018187}
+  m_Layer: 0
+  m_Name: TerrainGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1618916016277815056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625082054752818748}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.27272, y: 7.0841856, z: -20.584757}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8848028560335018187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625082054752818748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b09aa32ee4632a4580659412847bb41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTerrainCount: 25
+  terrainDatas:
+  - {fileID: 11400000, guid: 462225de22d19064a909ae17fb825863, type: 2}
+  - {fileID: 11400000, guid: 1e991469239e3f84eb864b99e4a98472, type: 2}
+  - {fileID: 11400000, guid: edf23386b3fdc6240b0704f1a659083c, type: 2}
+  - {fileID: 11400000, guid: 11652b4709d2c024f98e56e36438571d, type: 2}
+  terrainDatasInit:
+  - {fileID: 11400000, guid: 462225de22d19064a909ae17fb825863, type: 2}
+  - {fileID: 11400000, guid: 462225de22d19064a909ae17fb825863, type: 2}
+  - {fileID: 11400000, guid: 462225de22d19064a909ae17fb825863, type: 2}
+  - {fileID: 11400000, guid: 462225de22d19064a909ae17fb825863, type: 2}
+  terrainHolder: {fileID: 0}
+  minDistanceFromPlayer: 20
+  currentPosition: {x: 0, y: 0, z: 0}
