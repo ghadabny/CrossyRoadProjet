@@ -54,7 +54,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 462225de22d19064a909ae17fb825863, type: 2}
   - {fileID: 11400000, guid: 462225de22d19064a909ae17fb825863, type: 2}
   - {fileID: 11400000, guid: 462225de22d19064a909ae17fb825863, type: 2}
-  - {fileID: 11400000, guid: 462225de22d19064a909ae17fb825863, type: 2}
   terrainHolder: {fileID: 0}
   minDistanceFromPlayer: 20
   currentPosition: {x: 0, y: 0, z: 0}

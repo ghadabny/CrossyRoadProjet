@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Text scoreText;
     [SerializeField] private MovingObject currentLog;
 
-    private int score;
+    //private int score;
     private Animator animator;
     private Rigidbody rb;
     private bool isHopping;
@@ -19,53 +19,62 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
-    {
-        score++;
-        
-    }
-
     private void Update()
     {
-        scoreText.text = "Score: " + score;
         if (Input.GetKeyDown(KeyCode.UpArrow) && !isHopping)
-            TryMove(new Vector3(1, 0, CalculateZDifference()));
+        {
+            TryMove(Vector3.right);
+            ScoreManager.instance.AddScore(1);//Vector3.forward + new Vector3(0, 0, CalculateZDifference())
+        }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHopping)
-            TryMove(new Vector3(0, 0, 1));
+            TryMove(Vector3.forward + new Vector3(0, 0, CalculateZDifference()));//Vector3.left
         else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHopping)
-            TryMove(new Vector3(0, 0, -1));
+            TryMove(-Vector3.forward + new Vector3(0, 0, CalculateZDifference()));//Vector3.right
         else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHopping)
-            TryMove(new Vector3(-1, 0, CalculateZDifference()));
+            TryMove(Vector3.left);//-Vector3.forward + new Vector3(0, 0, CalculateZDifference())
+
+        
     }
 
     private float CalculateZDifference()
     {
-        return transform.position.z % 1 != 0 ? Mathf.Round(transform.position.z) - transform.position.z : 0;
+        return Mathf.Round(transform.position.z) - transform.position.z;
     }
 
-    private void TryMove(Vector3 difference)
+    private void TryMove(Vector3 direction)
     {
-        Vector3 newPosition = transform.position + difference;
-        Vector3 raycastOrigin = transform.position + difference.normalized * 0.1f;  // Start the ray just ahead of the player
-        float rayLength = difference.magnitude + 0.1f;  // Slightly longer than the difference to catch all possible collisions
-
-        if (!Physics.Raycast(raycastOrigin, difference.normalized, rayLength))
+        Vector3 newPosition = transform.position + direction;
+        if (!Physics.Raycast(transform.position, direction, direction.magnitude))
         {
-            animator.SetTrigger("hop");
-            isHopping = true;
-            transform.position = newPosition;
-            terrainGenerator.SpawnTerrain(false, transform.position);
-            StartCoroutine(HandleHopDown());
+            MoveToPosition(newPosition);
         }
     }
 
-    IEnumerator HandleHopDown()
+    private void MoveToPosition(Vector3 position)
     {
-        yield return new WaitForSeconds(0.2f); // Wait for the peak of the hop
-        rb.MovePosition(rb.position - new Vector3(0, 0.2f, 0)); // Move back down
-        isHopping = false;
+        animator.SetTrigger("hop");
+        isHopping = true;
+        StartCoroutine(MoveAndHandleHop(position));
     }
 
+    IEnumerator MoveAndHandleHop(Vector3 newPosition)
+    {
+        rb.MovePosition(newPosition);
+        terrainGenerator.SpawnTerrain(false, newPosition);
+        yield return new WaitForSeconds(0.3f); // Animation duration
+        isHopping = false;
+        DetachFromLog();
+        
+    }
+
+    private void DetachFromLog()
+    {
+        if (transform.parent != null)
+        {
+            transform.parent = null;
+            currentLog = null;
+        }
+    }
 
 
     private void OnCollisionEnter(Collision collision)

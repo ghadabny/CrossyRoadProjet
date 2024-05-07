@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1494735848779859391}
   - component: {fileID: 7336550755581223666}
-  - component: {fileID: 8764088095161762822}
   - component: {fileID: 6681293996216409450}
   - component: {fileID: 8064814006506449043}
+  - component: {fileID: 4388089596243021556}
   m_Layer: 0
   m_Name: CrossyTrain
-  m_TagString: Untagged
+  m_TagString: CrossyTrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,20 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3b2f42f48d79c4e9646d734f7d00d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 70
+  speed: 60
   isLog: 0
---- !u!114 &8764088095161762822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7163153149178758326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb3f5ae67f47dd4cbc06f2983316c15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &6681293996216409450
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -113,7 +101,19 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 2, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 22}
+--- !u!114 &4388089596243021556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7163153149178758326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb3f5ae67f47dd4cbc06f2983316c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &32306974327289633
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124,7 +124,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 2f8211099c5296147b13e8340fc5cc65, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f8211099c5296147b13e8340fc5cc65, type: 3}
       propertyPath: m_LocalPosition.y
@@ -132,23 +132,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f8211099c5296147b13e8340fc5cc65, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 19.33
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f8211099c5296147b13e8340fc5cc65, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f8211099c5296147b13e8340fc5cc65, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f8211099c5296147b13e8340fc5cc65, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f8211099c5296147b13e8340fc5cc65, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f8211099c5296147b13e8340fc5cc65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -156,7 +156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f8211099c5296147b13e8340fc5cc65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2f8211099c5296147b13e8340fc5cc65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
