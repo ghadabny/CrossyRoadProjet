@@ -2,24 +2,16 @@ using UnityEngine;
 using UnityEngine.Events; // Required for UnityEvent
 
 public class FlashingLight : MonoBehaviour
-{/*
-    public Light warningLight;
-    public float flashDuration = 0.5f;
-    private bool isFlashing = false;
+{
+    //public Light warningLight;
+    //public float flashDuration = 0.5f;
+    //private bool isFlashing = false;
 
     // Define an event to trigger flashing
-    public UnityEvent onTrainApproaching;
+    //public UnityEvent onTrainApproaching;
 
-    void Start()
-    {
-        if (warningLight == null)
-            warningLight = GetComponent<Light>();
-
-        // Subscribe to the event
-        if (onTrainApproaching != null)
-            onTrainApproaching.AddListener(StartFlashingWithDelay);
-    }
-
+    
+    /*
     public void StartFlashingWithDelay()
     {
         if (!isFlashing)

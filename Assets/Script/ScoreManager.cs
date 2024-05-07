@@ -4,47 +4,69 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
-    public Text scoreText;
+    public Text scoreText; 
+    public Text coinText;  
+
     private int score = 0;
+    private int coins = 0;
 
     void Awake()
     {
-        // Singleton setup
+       
         if (instance == null)
         {
             instance = this;
         }
         else if (instance != this)
-            Destroy(gameObject);
+        {
+            Destroy(gameObject); 
+        }
     }
 
     void Start()
     {
-        // Attempt to find the scoreText again in case it's a new instance
-        scoreText = GameObject.Find("Score").GetComponent<Text>();
-        if (scoreText == null)
-            Debug.LogError("Failed to find scoreText component on GameObject.");
-        else
-            ResetScore();  // Optionally reset the score here
+       
+        ResetScores();
     }
-    public void ResetScore()
+
+    public void ResetScores()
     {
         score = 0;
-        UpdateScoreText();
+        coins = 0;
+        UpdateUI(); 
     }
 
     public void AddScore(int amount)
     {
         score += amount;
-        UpdateScoreText();
+        UpdateScoreText(); 
     }
 
-    void UpdateScoreText()
+    public void AddCoins(int amount)
+    {
+        coins += amount;
+        UpdateCoinText(); 
+    }
+
+    private void UpdateScoreText()
     {
         if (scoreText != null)
             scoreText.text = " " + score;
         else
-            Debug.LogError("scoreText is null!");
+            Debug.LogError("ScoreText component not found!");
     }
 
+    private void UpdateCoinText()
+    {
+        if (coinText != null)
+            coinText.text = " " + coins;
+        else
+            Debug.LogError("CoinText component not found!");
+    }
+
+    private void UpdateUI()
+    {
+        UpdateScoreText();
+        UpdateCoinText();
+    }
 }

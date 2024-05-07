@@ -17,13 +17,13 @@ public class TerrainGenerator : MonoBehaviour
 
     private void Start()
     {
-        // Spawn initial terrains
+        
         foreach (var terrainData in terrainDatasInit)
         {
             SpawnTerrainInit(terrainData);
         }
 
-        // Spawn remaining terrains randomly until max count is reached
+       
         while (currentTerrains.Count < maxTerrainCount)
         {
             SpawnTerrain(true,new Vector3(0, 0, 0));
@@ -37,7 +37,7 @@ public class TerrainGenerator : MonoBehaviour
         {
             GameObject terrain = Instantiate(terrainData.possibleTerrain[Random.Range(0, terrainData.possibleTerrain.Count)], currentPosition, Quaternion.identity, terrainHolder);
             currentTerrains.Add(terrain);
-            currentPosition.x++; // Increment or update based on how your terrains are laid out
+            currentPosition.x++; 
         }
     }
 

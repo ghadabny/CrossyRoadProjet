@@ -12,8 +12,6 @@ public class MovingObject : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
-
-        // Check if the object has gone past the boundaries
         if (transform.position.z < minZ || transform.position.z > maxZ)
         {
             Destroy(gameObject);  

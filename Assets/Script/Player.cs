@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private Text scoreText;
     [SerializeField] private MovingObject currentLog;
+    public GameObject specificCoin;
 
     //private int score;
     private Animator animator;
@@ -24,14 +25,14 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow) && !isHopping)
         {
             TryMove(Vector3.right);
-            ScoreManager.instance.AddScore(1);//Vector3.forward + new Vector3(0, 0, CalculateZDifference())
+            ScoreManager.instance.AddScore(1);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHopping)
-            TryMove(Vector3.forward + new Vector3(0, 0, CalculateZDifference()));//Vector3.left
+            TryMove(Vector3.forward + new Vector3(0, 0, CalculateZDifference()));
         else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHopping)
-            TryMove(-Vector3.forward + new Vector3(0, 0, CalculateZDifference()));//Vector3.right
+            TryMove(-Vector3.forward + new Vector3(0, 0, CalculateZDifference()));
         else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHopping)
-            TryMove(Vector3.left);//-Vector3.forward + new Vector3(0, 0, CalculateZDifference())
+            TryMove(Vector3.left);
 
         
     }
@@ -61,7 +62,7 @@ public class Player : MonoBehaviour
     {
         rb.MovePosition(newPosition);
         terrainGenerator.SpawnTerrain(false, newPosition);
-        yield return new WaitForSeconds(0.3f); // Animation duration
+        yield return new WaitForSeconds(0.3f); 
         isHopping = false;
         DetachFromLog();
         
@@ -77,6 +78,17 @@ public class Player : MonoBehaviour
     }
 
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log($"Entered trigger with {other.gameObject.name} at position {other.transform.position}");
+        if (other.CompareTag("CrossyCoin"))
+        {
+            Debug.Log("Collecting coin...");
+            ScoreManager.instance.AddCoins(1);
+            Destroy(other.gameObject);
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         var movingObject = collision.collider.GetComponent<MovingObject>();
@@ -86,14 +98,14 @@ public class Player : MonoBehaviour
         {
             if (movingObject.isLog)
             {
-                currentLog = movingObject;  // Set the current log
-                transform.parent = collision.collider.transform;  // Parent to the log
+                currentLog = movingObject; 
+                transform.parent = collision.collider.transform;  
             }
         }
         else if (obstacleObject != null && obstacleObject.isObstacle)
         {
-            isHopping = false;  // Stop hopping
-            transform.parent = collision.collider.transform;  // Optionally parent to the obstacle, might not be needed
+            isHopping = false; 
+            transform.parent = collision.collider.transform;  
         }
         else
         {
@@ -101,13 +113,15 @@ public class Player : MonoBehaviour
         }
     }
 
+
+
     private void OnCollisionExit(Collision collision)
     {
         var movingObject = collision.collider.GetComponent<MovingObject>();
         if (movingObject == currentLog)
         {
-            currentLog = null;  // Clear the current log
-            transform.parent = null;  // Detach from the log
+            currentLog = null; 
+            transform.parent = null;  
             Debug.Log("Left the log");
         }
     }

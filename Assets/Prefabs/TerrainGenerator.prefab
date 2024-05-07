@@ -56,4 +56,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 462225de22d19064a909ae17fb825863, type: 2}
   terrainHolder: {fileID: 0}
   minDistanceFromPlayer: 20
+  coinPrefab: {fileID: 8608563067623883687, guid: ae264bbf51d2055479582055c2215b8a, type: 3}
+  coinsPerTerrain: 5
+  coinSpawnHeight: 0.1
   currentPosition: {x: 0, y: 0, z: 0}
