@@ -67,10 +67,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b644d195b967a4ba5384e65038370f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  timeToPickUp: 5
-  eagle: {fileID: 803292617208525097}
-  offscreenStartPosition: {x: -10, y: 10, z: 0}
+  playerGameObject: {fileID: 5542021407807059915, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
+  swoopDownTime: 0
+  swoopSpeed: 30
+  swoopTarget: {fileID: 0}
 --- !u!1 &8550107537742694896
 GameObject:
   m_ObjectHideFlags: 0
