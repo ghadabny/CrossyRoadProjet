@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 8361601682189623679}
   - component: {fileID: 5809816743399720411}
   - component: {fileID: 1244451938805571576}
+  - component: {fileID: 7209371825547095415}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,6 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 0}
   scoreText: {fileID: 0}
+  currentLog: {fileID: 2627171118185091448, guid: 0c32bf020035eff4e8625574a28341f1, type: 3}
+  specificCoin: {fileID: 2698125039339348622, guid: e3ebb912284e3ab4db31d4d5f90dc8f9, type: 3}
 --- !u!65 &8361601682189623679
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57,7 +60,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3799829173361471503}
-  m_Material: {fileID: 13400000, guid: 1ff371c4ac41b4d4da3ae86d3f4d056e, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -102,7 +105,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -116,9 +119,21 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!114 &7209371825547095415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3799829173361471503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9293396c15b557e47a3d1760f2525442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4355686630395542644
 PrefabInstance:
   m_ObjectHideFlags: 0

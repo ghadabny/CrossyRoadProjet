@@ -81,21 +81,7 @@ public class Player : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log($"Entered trigger with: {other.gameObject.name}, Tag: {other.tag}");
-        if (other.CompareTag("CrossyCoin"))
-        {
-            Debug.Log("Coin collected");
-            ScoreManager.instance.AddCoins(1);
-            Destroy(other.gameObject);
-        }
-        else
-        {
-            Debug.Log($"Ignored trigger with: {other.gameObject.name}, Tag: {other.tag}");
-        }
-    }
-
+    
 
 
     private void OnCollisionEnter(Collision collision)
