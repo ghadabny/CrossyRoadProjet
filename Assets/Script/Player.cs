@@ -1,6 +1,4 @@
-﻿
-
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +19,9 @@ public class Player : MonoBehaviour
     private float checkInterval = 1.0f; // How often to check for movement in seconds
     private float lastCheckTime = 0;
 
+    private int backStepsCount = 0; // Counter for backward steps
+    private const int maxBackSteps = 3; // Maximum allowed backward steps
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -40,13 +41,30 @@ public class Player : MonoBehaviour
         {
             TryMove(Vector3.right, Vector3.zero);
             ScoreManager.instance.AddScore(1);
+            ResetBackStepsCount();
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHopping)
+        {
             TryMove(Vector3.forward + new Vector3(0, 0, CalculateZDifference()), new Vector3(0, -90, 0));
+            ResetBackStepsCount();
+        }
         else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHopping)
+        {
             TryMove(-Vector3.forward + new Vector3(0, 0, CalculateZDifference()), new Vector3(0, 90, 0));
+            ResetBackStepsCount();
+        }
         else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHopping)
-            TryMove(Vector3.left, new Vector3(0, 180, 0));
+        {
+            if (backStepsCount < maxBackSteps)
+            {
+                TryMove(Vector3.left, new Vector3(0, 180, 0));
+                backStepsCount++;
+            }
+            else
+            {
+                Debug.Log("Cannot move back more than 3 steps!");
+            }
+        }
     }
 
     private float CalculateZDifference()
@@ -94,7 +112,9 @@ public class Player : MonoBehaviour
     {
         return Vector3.Distance(transform.position, lastPosition) < movementThreshold;
     }
+
+    private void ResetBackStepsCount()
+    {
+        backStepsCount = 0;
+    }
 }
-
-
-
