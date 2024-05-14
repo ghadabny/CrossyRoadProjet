@@ -65,7 +65,7 @@ crashlytics-build.properties
 # It's usually better not to track the Packages folder in source control,
 # but to include the Packages/manifest.json to make sure everyone gets
 # the right dependencies
-[Pp]ackages/
+#[Pp]ackages/
 !Packages/manifest.json
 !Packages/packages-lock.json
 
