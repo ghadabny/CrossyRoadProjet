@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿
+
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,35 +8,45 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private Text scoreText;
-    [SerializeField] private MovingObject currentLog;
+    public MovingObject CurrentLog { get; set; }
     public GameObject specificCoin;
+    public bool IsOnLog { get; set; }
 
-    //private int score;
     private Animator animator;
     private Rigidbody rb;
-    private bool isHopping;
+    public bool isHopping;
+
+    private Vector3 lastPosition;
+    private float movementThreshold = 2; // Threshold distance to consider significant movement
+    private float checkInterval = 1.0f; // How often to check for movement in seconds
+    private float lastCheckTime = 0;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        lastPosition = transform.position;
     }
 
     private void Update()
     {
+        if (Time.time - lastCheckTime >= checkInterval)
+        {
+            lastCheckTime = Time.time;
+            lastPosition = transform.position;
+        }
+
         if (Input.GetKeyDown(KeyCode.UpArrow) && !isHopping)
         {
-            TryMove(Vector3.right);
+            TryMove(Vector3.right, Vector3.zero);
             ScoreManager.instance.AddScore(1);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHopping)
-            TryMove(Vector3.forward + new Vector3(0, 0, CalculateZDifference()));
+            TryMove(Vector3.forward + new Vector3(0, 0, CalculateZDifference()), new Vector3(0, -90, 0));
         else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHopping)
-            TryMove(-Vector3.forward + new Vector3(0, 0, CalculateZDifference()));
+            TryMove(-Vector3.forward + new Vector3(0, 0, CalculateZDifference()), new Vector3(0, 90, 0));
         else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHopping)
-            TryMove(Vector3.left);
-
-        
+            TryMove(Vector3.left, new Vector3(0, 180, 0));
     }
 
     private float CalculateZDifference()
@@ -42,95 +54,47 @@ public class Player : MonoBehaviour
         return Mathf.Round(transform.position.z) - transform.position.z;
     }
 
-    private void TryMove(Vector3 direction)
+    private void TryMove(Vector3 direction, Vector3 rotation)
     {
         Vector3 newPosition = transform.position + direction;
         if (!Physics.Raycast(transform.position, direction, direction.magnitude))
         {
-            MoveToPosition(newPosition);
+            MoveToPosition(newPosition, rotation);
         }
     }
 
-    private void MoveToPosition(Vector3 position)
+    private void MoveToPosition(Vector3 position, Vector3 rotation)
     {
         animator.SetTrigger("hop");
         isHopping = true;
-        StartCoroutine(MoveAndHandleHop(position));
+        StartCoroutine(MoveAndHandleHop(position, rotation));
     }
 
-    IEnumerator MoveAndHandleHop(Vector3 newPosition)
+    IEnumerator MoveAndHandleHop(Vector3 newPosition, Vector3 newRotation)
     {
+        transform.rotation = Quaternion.Euler(newRotation);
         rb.MovePosition(newPosition);
         terrainGenerator.SpawnTerrain(false, newPosition);
-        yield return new WaitForSeconds(0.3f); 
+        yield return new WaitForSeconds(0.3f);
         isHopping = false;
-        DetachFromLog();
-        
-    }
 
-    private void DetachFromLog()
-    {
-        if (transform.parent != null)
+        if (CurrentLog == null)
         {
             transform.parent = null;
-            currentLog = null;
+            IsOnLog = false;
         }
     }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log($"Entered trigger with {other.gameObject.name} at position {other.transform.position}");
-        if (other.CompareTag("CrossyCoin"))
-        {
-            Debug.Log("Collecting coin...");
-            ScoreManager.instance.AddCoins(1);
-            Destroy(other.gameObject);
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        var movingObject = collision.collider.GetComponent<MovingObject>();
-        var obstacleObject = collision.collider.GetComponent<ObstacleObject>();
-
-        if (movingObject != null)
-        {
-            if (movingObject.isLog)
-            {
-                currentLog = movingObject; 
-                transform.parent = collision.collider.transform;  
-            }
-        }
-        else if (obstacleObject != null && obstacleObject.isObstacle)
-        {
-            isHopping = false; 
-            transform.parent = collision.collider.transform;  
-        }
-        else
-        {
-            transform.parent = null;
-        }
-    }
-
-
-
-    private void OnCollisionExit(Collision collision)
-    {
-        var movingObject = collision.collider.GetComponent<MovingObject>();
-        if (movingObject == currentLog)
-        {
-            currentLog = null; 
-            transform.parent = null;  
-            Debug.Log("Left the log");
-        }
-    }
-
 
     public void FinishHop()
     {
         isHopping = false;
     }
 
-
+    public bool hasNotMovedMuch()
+    {
+        return Vector3.Distance(transform.position, lastPosition) < movementThreshold;
+    }
 }
+
+
+

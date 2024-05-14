@@ -6,6 +6,8 @@ TagManager:
   tags:
   - CrossyTrain
   - CrossyCoin
+  - Tree
+  - Grass
   layers:
   - Default
   - TransparentFX

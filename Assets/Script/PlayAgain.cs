@@ -9,6 +9,7 @@ public class PlayAgain : MonoBehaviour
     public void LoadGame() 
     {
         SceneManager.LoadScene("SampleScene");
+        Debug.Log("PlayAgain Pressed");
 
     }
 }

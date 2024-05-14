@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1588844714835408701}
   - component: {fileID: 6689352980186681115}
   - component: {fileID: -7456793809273886585}
+  - component: {fileID: 2823339523789897529}
   m_Layer: 0
   m_Name: Grass04
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,8 +128,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07822eca336fefb419ac0e79bcb4130d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinPrefab: {fileID: 135931924060612539, guid: 74d247c8d0e77494f8e8f18b10b9407f, type: 3}
-  numberOfCoins: 1
+  coinPrefab: {fileID: 2698125039339348622, guid: e3ebb912284e3ab4db31d4d5f90dc8f9, type: 3}
+  numberOfCoins: 2
+--- !u!64 &2823339523789897529
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2962070922170191796}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &157026522811238361
 PrefabInstance:
   m_ObjectHideFlags: 0
