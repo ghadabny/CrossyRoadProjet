@@ -24,7 +24,14 @@ public class CoinCollector : MonoBehaviour
     {
         Debug.Log("Collecting and destroying coin: " + coin.name);
         Destroy(coin);
-        ScoreManager.instance.AddCoins(1);
+        
+        int randomScore = Random.Range(1, 4);
+        ScoreManager.instance.AddCoins(randomScore);
+
+        //Debug.Log("Coin value: " + randomScore);
+
+        /* Old version:
+          ScoreManager.instance.AddCoins(1);*/
     }
 
     
