@@ -79,7 +79,7 @@ public class ScoreManager : MonoBehaviour
         Debug.LogError("SaveRoundData done: " + round);
     }*/
 
-    private void UpdateUI()
+private void UpdateUI()
     {
         UpdateScoreText();
         UpdateCoinText();
