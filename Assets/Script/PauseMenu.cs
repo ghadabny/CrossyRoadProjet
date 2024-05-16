@@ -11,12 +11,15 @@ public class PauseMenu : MonoBehaviour
     private Button btn;
     private Button PlayBtn = null;
     private Button restartBtn = null;
-
+    private Button QuitBtn = null;
+    public MainMenu mainMenu;
     public GameObject pauseMenuUI;
 
+    public bool muted;
 
     void Start()
     {
+      
         btn = GameObject.Find("PauseBtn")?.GetComponent<Button>();
         if (btn != null && PlayBtn == null && restartBtn == null)
         {
@@ -40,15 +43,26 @@ public class PauseMenu : MonoBehaviour
             restartBtn = null;
             PlayBtn = null;   
         }
+
+        QuitBtn = GameObject.Find("QuitBtn")?.GetComponent<Button>();
+        if(QuitBtn != null)
+        {
+            QuitBtn.onClick.AddListener(Reload);
+            restartBtn = null;
+            PlayBtn = null;
+            QuitBtn = null;
+        }
     }
     void Update()
     {
+        
         btn = GameObject.Find("PauseBtn")?.GetComponent<Button>();
-        if (btn != null && PlayBtn == null && restartBtn == null)
+        if (btn != null && PlayBtn == null && restartBtn == null && QuitBtn == null)
         {
             btn.onClick.AddListener(Pause);
             PlayBtn = GameObject.Find("PlayBtn")?.GetComponent<Button>();
             restartBtn = GameObject.Find("StartBtn")?.GetComponent<Button>();
+            QuitBtn = GameObject.Find("QuitBtn")?.GetComponent<Button>();
 
         }
         PlayBtn = GameObject.Find("PlayBtn")?.GetComponent<Button>();
@@ -58,6 +72,7 @@ public class PauseMenu : MonoBehaviour
             PlayBtn.onClick.AddListener(Resume);
             PlayBtn = null;
             restartBtn = null;
+            QuitBtn = null;
         }
         
         restartBtn = GameObject.Find("StartBtn")?.GetComponent<Button>();
@@ -66,7 +81,16 @@ public class PauseMenu : MonoBehaviour
             restartBtn.onClick.AddListener(Resume);
             restartBtn = null;
             PlayBtn = null;
-            Debug.Log("Button clicked!");
+            QuitBtn = null;     
+        }
+
+        QuitBtn = GameObject.Find("QuitBtn")?.GetComponent<Button>();
+        if(QuitBtn != null)
+        {
+            QuitBtn.onClick.AddListener(Resume);
+            restartBtn = null;
+            PlayBtn = null;
+            QuitBtn = null;
         }
     }
 
@@ -89,4 +113,11 @@ public class PauseMenu : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
     }
+
+    void Reload()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
+
+    
 }
