@@ -2,22 +2,22 @@ using UnityEngine;
 
 public class ObstacleObject : MonoBehaviour
 {
-    public bool isObstacle;
-    public bool isLillyPad;
-
+    /*
+    /*
+    public bool CanMove = true;
     private void OnCollisionEnter(Collision collision)
     {
+
         Player player = collision.collider.GetComponent<Player>();
-        if (player != null)
+        if (collision!=null)
         {
-            if (isObstacle && !isLillyPad)
-            {
-                Debug.Log("Player has collided with an obstacle.");
-            }
-            else if (isLillyPad)
-            {
-                Debug.Log("Player has landed on a lillypad.");
-            }
+            
+                CanMove = false;
+            
         }
+        else CanMove = true;
     }
+    */
+  
 }
+

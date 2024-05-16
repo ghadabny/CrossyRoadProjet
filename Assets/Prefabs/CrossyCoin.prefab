@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3331109843939948596}
-  - component: {fileID: 8864097756537787360}
   - component: {fileID: -5879483182208500696}
   m_Layer: 0
   m_Name: CrossyCoin
@@ -34,18 +33,6 @@ Transform:
   - {fileID: 2759104530478385516}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8864097756537787360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2698125039339348622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9293396c15b557e47a3d1760f2525442, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!64 &-5879483182208500696
 MeshCollider:
   m_ObjectHideFlags: 0

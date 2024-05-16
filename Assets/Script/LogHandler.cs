@@ -66,4 +66,6 @@ public class LogHandler : MonoBehaviour
             Debug.Log("Player detached from the log.");
         }
     }
+
+
 }

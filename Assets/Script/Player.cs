@@ -75,10 +75,37 @@ public class Player : MonoBehaviour
     private void TryMove(Vector3 direction, Vector3 rotation)
     {
         Vector3 newPosition = transform.position + direction;
-        if (!Physics.Raycast(transform.position, direction, direction.magnitude))
+
+        // Check if the new position will collide with a tree
+        if (!WillCollideWithTree(newPosition))
         {
+            if (IsOnLog)
+            {
+                // Detach from the log immediately
+                transform.parent = null;
+                IsOnLog = false;
+            }
             MoveToPosition(newPosition, rotation);
         }
+        else
+        {
+            Debug.Log("Blocked by a tree!");
+        }
+    }
+
+    private bool WillCollideWithTree(Vector3 position)
+    {
+        // Perform a small sphere cast at the target position to check for collisions with trees
+        float radius = 0.3f; // Adjusted radius for a smaller, more precise check
+        Collider[] hitColliders = Physics.OverlapSphere(position, radius);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Tree"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void MoveToPosition(Vector3 position, Vector3 rotation)
@@ -91,16 +118,11 @@ public class Player : MonoBehaviour
     IEnumerator MoveAndHandleHop(Vector3 newPosition, Vector3 newRotation)
     {
         transform.rotation = Quaternion.Euler(newRotation);
+        yield return null;  // Ensure we have a frame to detach from the parent before moving
         rb.MovePosition(newPosition);
         terrainGenerator.SpawnTerrain(false, newPosition);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);  // Reduced delay for faster response
         isHopping = false;
-
-        if (CurrentLog == null)
-        {
-            transform.parent = null;
-            IsOnLog = false;
-        }
     }
 
     public void FinishHop()
@@ -116,5 +138,29 @@ public class Player : MonoBehaviour
     private void ResetBackStepsCount()
     {
         backStepsCount = 0;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        MovingObject movingObject = collision.collider.GetComponent<MovingObject>();
+        if (movingObject != null && movingObject.isLog)
+        {
+            transform.SetParent(movingObject.transform);
+            CurrentLog = movingObject;
+            IsOnLog = true;
+            Debug.Log("Player attached to log");
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        MovingObject movingObject = collision.collider.GetComponent<MovingObject>();
+        if (movingObject != null && movingObject.isLog)
+        {
+            transform.SetParent(null);
+            CurrentLog = null;
+            IsOnLog = false;
+            Debug.Log("Player detached from log");
+        }
     }
 }

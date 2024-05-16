@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   possibleTerrain:
   - {fileID: 8570926128211787685, guid: 457171d2ce2a90e4caa6924a54939a7b, type: 3}
-  maxInSuccession: 1
+  maxInSuccession: 2

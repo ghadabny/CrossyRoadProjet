@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8791363378270428207}
   - component: {fileID: 6500555479407642674}
   - component: {fileID: 1418119552116151494}
-  - component: {fileID: 8562815841677472531}
+  - component: {fileID: 7013486209782780289}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5542021407807059915}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 0.2, z: 0}
+  m_LocalPosition: {x: 4, y: 0, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -72,8 +72,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.6, y: 0.6, z: 0.6}
-  m_Center: {x: 0, y: 0.2, z: 0}
+  m_Size: {x: 1.5473012, y: 1.8179572, z: 1.0420735}
+  m_Center: {x: 0.040598113, y: 0.90670145, z: -0.11277396}
 --- !u!95 &6500555479407642674
 Animator:
   serializedVersion: 5
@@ -119,10 +119,10 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
---- !u!114 &8562815841677472531
+--- !u!114 &7013486209782780289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,7 +160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3c8692da4910b484d91ee0a94b0b2372, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3c8692da4910b484d91ee0a94b0b2372, type: 3}
       propertyPath: m_LocalPosition.z
