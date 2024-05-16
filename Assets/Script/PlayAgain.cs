@@ -13,6 +13,12 @@ public class PlayAgain : MonoBehaviour
 
     }
 
+    public void BackMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
+        Debug.Log("Menu Pressed");
+
+    }
     public void Quit()
     {
         Application.Quit();

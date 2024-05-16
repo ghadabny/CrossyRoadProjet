@@ -45,6 +45,6 @@ public class LeaderBoardLoader : MonoBehaviour
 
         Debug.Log("Scores sorted and saved. The highest score is: "+ highestScore);
     }
-
+    
 
 }
