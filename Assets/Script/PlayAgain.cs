@@ -12,4 +12,10 @@ public class PlayAgain : MonoBehaviour
         Debug.Log("PlayAgain Pressed");
 
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+        Debug.Log("Le joueur a quitté le jeu");
+    }
 }
