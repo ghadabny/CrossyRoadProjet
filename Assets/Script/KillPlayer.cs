@@ -21,6 +21,8 @@ public class NewBehaviourScript : MonoBehaviour
             //SaveRound.SortRoundData();
             //Save.saveScores();
             //Save.sortScores();
+            SaveRound.SaveRoundData();
+            LeaderBoardLoader.HighestScore();
             SceneManager.LoadScene("GameOver");
             //ScoreManager.SaveRoundData(elapsedTime, score, coins); // Added This on the other hand causes issues
             //Debug.LogError("Round Saved."); // Added

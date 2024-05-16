@@ -32,6 +32,7 @@ public class DisplayScores : MonoBehaviour
         UpdateScoreText();
         UpdateCoinText();
         UpdateTimerText();
+        UpdateHighScoreText();
     }
 
     private void UpdateScoreText()
@@ -61,7 +62,7 @@ public class DisplayScores : MonoBehaviour
     private void UpdateHighScoreText()
     {
         if (highScoreText != null)
-            highScoreText.text = " " + TimeFormatter.FormatTime(PlayTime.elapsedTime);
+            highScoreText.text = "Highest Score: " + LeaderBoardLoader.highestScore;
         else
             Debug.LogError("highScoreText component not found!");
     }

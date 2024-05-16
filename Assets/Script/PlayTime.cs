@@ -43,7 +43,7 @@ public class PlayTime : MonoBehaviour
     private void UpdateUI()
     {
         
-         PlayTimeText.text = "Play Time: " + TimeFormatter.FormatTime(elapsedTime);       
+         PlayTimeText.text = TimeFormatter.FormatTime(elapsedTime);       
         //Debug.LogError("UI updated");
     }
 }

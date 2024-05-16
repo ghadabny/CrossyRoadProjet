@@ -1,52 +1,50 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
-/*using UnityEngine.UI;
-using System.Linq;
-using Unity.VisualScripting;*/
+using System.IO;
 
 public class LeaderBoardLoader : MonoBehaviour
 {
-    Leaderboard leaderboard = new Leaderboard();
-    public Text roundScore;
-    public Text roundCoins;
-    public Text roundElapsedTime;
-    List<RoundData> roundStats = new List<RoundData>();
-
-    void Start()
+    public static string inputPath = "Assets/ScoreData.txt";
+    public static string outputPath = "Assets/SortedScoreData.txt";
+    public static string highestScore;
+    public static void HighestScore()
     {
-        roundStats = leaderboard.LoadLeaderboardData();
-        roundScore.text = " " + roundStats[0];
-        roundCoins.text = " " + roundStats[1];
-        roundElapsedTime.text = " " + roundStats[2];
-        Debug.LogWarning("LeaderboardLoader done!");
-    }
-}
+        string[] lines = File.ReadAllLines(inputPath);
+        List<string> scores = new List<string>();
 
-
-
-
-    /*public LeaderBoardData LBData;
-    public Text leaderboardText;
-
-    void Start()
-    {
-        DisplayLeaderboard();
-    }
-
-    private void DisplayLeaderboard()
-    {
-        var sortedRounds = LBData.rounds.OrderByDescending(round => round.score);
-
-        string leaderboard = "Leaderboard:\n";
-
-        foreach (var round in sortedRounds)
+        foreach (string line in lines)
         {
-            string formattedTime = TimeFormatter.FormatTime(round.elapsedTime);
-            leaderboard += $"Time: {formattedTime} - Score: {round.score} - Coins: {round.coins}\n";
+            string[] parts = line.Split(',');
+            scores.Add(parts[0]);
 
         }
+        List<int> intScores = new List<int>();
+        foreach (string score in scores)
+        {
+            int intScore;
+            if (int.TryParse(score, out intScore))
+            {
+                intScores.Add(intScore);
+            }
+            else
+            {
+                Debug.LogWarning("Failed to parse score: " + score);
+            }
+        }
+        scores.Sort((a, b) => b.CompareTo(a));
 
-        leaderboardText.text = leaderboard;
-    }*/
+        highestScore = scores[0];
 
+        using (StreamWriter writer = new StreamWriter(outputPath))
+        {
+            foreach (string score in scores)
+            {
+                writer.WriteLine(score.ToString());
+            }
+        }
+
+        Debug.Log("Scores sorted and saved. The highest score is: "+ highestScore);
+    }
+
+
+}
