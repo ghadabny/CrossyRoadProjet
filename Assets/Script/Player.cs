@@ -1,6 +1,4 @@
-﻿
-
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,16 +8,19 @@ public class Player : MonoBehaviour
     [SerializeField] private Text scoreText;
     public MovingObject CurrentLog { get; set; }
     public GameObject specificCoin;
-    public bool IsOnLog { get; set; }
 
     private Animator animator;
     private Rigidbody rb;
     public bool isHopping;
+    private bool isAttachedToLog;
 
     private Vector3 lastPosition;
     private float movementThreshold = 2; // Threshold distance to consider significant movement
     private float checkInterval = 1.0f; // How often to check for movement in seconds
     private float lastCheckTime = 0;
+
+    private int backStepsCount = 0; // Counter for backward steps
+    private const int maxBackSteps = 3; // Maximum allowed backward steps
 
     private void Start()
     {
@@ -40,13 +41,30 @@ public class Player : MonoBehaviour
         {
             TryMove(Vector3.right, Vector3.zero);
             ScoreManager.instance.AddScore(1);
+            ResetBackStepsCount();
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHopping)
+        {
             TryMove(Vector3.forward + new Vector3(0, 0, CalculateZDifference()), new Vector3(0, -90, 0));
+            ResetBackStepsCount();
+        }
         else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHopping)
+        {
             TryMove(-Vector3.forward + new Vector3(0, 0, CalculateZDifference()), new Vector3(0, 90, 0));
+            ResetBackStepsCount();
+        }
         else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHopping)
-            TryMove(Vector3.left, new Vector3(0, 180, 0));
+        {
+            if (backStepsCount < maxBackSteps)
+            {
+                TryMove(Vector3.left, new Vector3(0, 180, 0));
+                backStepsCount++;
+            }
+            else
+            {
+                Debug.Log("Cannot move back more than 3 steps!");
+            }
+        }
     }
 
     private float CalculateZDifference()
@@ -57,32 +75,52 @@ public class Player : MonoBehaviour
     private void TryMove(Vector3 direction, Vector3 rotation)
     {
         Vector3 newPosition = transform.position + direction;
-        if (!Physics.Raycast(transform.position, direction, direction.magnitude))
+
+        // Check if the new position will collide with a tree
+        if (!WillCollideWithTree(newPosition))
         {
             MoveToPosition(newPosition, rotation);
         }
+        else
+        {
+            Debug.Log("Blocked by a tree!");
+        }
+    }
+
+    private bool WillCollideWithTree(Vector3 position)
+    {
+        // Perform a small sphere cast at the target position to check for collisions with trees
+        float radius = 0.3f; // Adjusted radius for a smaller, more precise check
+        Collider[] hitColliders = Physics.OverlapSphere(position, radius);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Tree"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void MoveToPosition(Vector3 position, Vector3 rotation)
     {
         animator.SetTrigger("hop");
         isHopping = true;
+        if (isAttachedToLog)
+        {
+            DetachFromLog();
+        }
         StartCoroutine(MoveAndHandleHop(position, rotation));
     }
 
     IEnumerator MoveAndHandleHop(Vector3 newPosition, Vector3 newRotation)
     {
         transform.rotation = Quaternion.Euler(newRotation);
+        yield return null;  // Ensure we have a frame to detach from the parent before moving
         rb.MovePosition(newPosition);
         terrainGenerator.SpawnTerrain(false, newPosition);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);  // Reduced delay for faster response
         isHopping = false;
-
-        if (CurrentLog == null)
-        {
-            transform.parent = null;
-            IsOnLog = false;
-        }
     }
 
     public void FinishHop()
@@ -94,7 +132,75 @@ public class Player : MonoBehaviour
     {
         return Vector3.Distance(transform.position, lastPosition) < movementThreshold;
     }
+
+    private void ResetBackStepsCount()
+    {
+        backStepsCount = 0;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Collision detected with " + collision.collider.name);
+
+        MovingObject movingObject = collision.collider.GetComponent<MovingObject>();
+        if (movingObject != null && movingObject.isLog)
+        {
+            AttachToLog(collision.collider.transform);
+            Debug.Log("Player attached to log");
+        }
+        else if (collision.gameObject.CompareTag("CrossyCoin"))
+        {
+            CollectCoin(collision.gameObject);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        MovingObject movingObject = collision.collider.GetComponent<MovingObject>();
+        if (movingObject != null && movingObject.isLog)
+        {
+            DetachFromLog();
+            Debug.Log("Player detached from log");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Trigger with: " + other.gameObject.name);
+        if (other.CompareTag("CrossyCoin"))
+        {
+            CollectCoin(other.gameObject);
+        }
+    }
+
+    private void CollectCoin(GameObject coin)
+    {
+        Debug.Log("Collecting and destroying coin: " + coin.name);
+        Destroy(coin);
+        ScoreManager.instance.AddCoins(1);
+    }
+
+    private void AttachToLog(Transform logTransform)
+    {
+        CurrentLog = logTransform.GetComponent<MovingObject>();
+        isAttachedToLog = true;
+        StartCoroutine(FollowLog());
+    }
+
+    private void DetachFromLog()
+    {
+        isAttachedToLog = false;
+        CurrentLog = null;
+        transform.parent = null; // Detach from the log's transform
+    }
+
+    private IEnumerator FollowLog()
+    {
+        while (isAttachedToLog && CurrentLog != null)
+        {
+            Vector3 logPosition = CurrentLog.transform.position;
+            transform.position = new Vector3(logPosition.x, transform.position.y, logPosition.z);
+            yield return null;  // Wait for the next frame
+        }
+    }
 }
-
-
-
