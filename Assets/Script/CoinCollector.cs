@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CoinCollector : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
        // Debug.Log("Collision with: " + collision.gameObject.name);
         if (collision.gameObject.CompareTag("CrossyCoin"))
@@ -24,15 +24,8 @@ public class CoinCollector : MonoBehaviour
     {
         Debug.Log("Collecting and destroying coin: " + coin.name);
         Destroy(coin);
-        
-        int randomScore = Random.Range(1, 4);
-        ScoreManager.instance.AddCoins(randomScore);
-
-        //Debug.Log("Coin value: " + randomScore);
-
-        /* Old version:
-          ScoreManager.instance.AddCoins(1);*/
-    }
+        ScoreManager.instance.AddCoins(1);
+    }*/
 
     
 }
