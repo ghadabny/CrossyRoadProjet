@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -191,13 +191,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
---- !u!1 &673225307 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5542021407807059915, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
-  m_PrefabInstance: {fileID: 2834001385029392286}
-  m_PrefabAsset: {fileID: 0}
-=======
 --- !u!1 &424447055
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,7 +469,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589515253}
   m_CullTransparentMesh: 1
->>>>>>> origin/Oumaima
 --- !u!1 &700621130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,7 +1050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc568fca588c6304985be73a8d55aacc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 673225307}
+  player: {fileID: 2074161935}
   offset: {x: 1, y: 2.35, z: 0}
   smoothness: 0.1
 --- !u!1 &1008054118
@@ -2099,6 +2091,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047779093}
   m_CullTransparentMesh: 1
+--- !u!1 &2074161935 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4712649752242785988, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
+  m_PrefabInstance: {fileID: 2834001385029392286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2834001385029392286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2109,11 +2106,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 111129694088683734, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 111129694088683734, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 111129694088683734, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2147,14 +2144,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1418119552116151494, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
-      propertyPath: m_Constraints
-      value: 122
-      objectReference: {fileID: 0}
-    - target: {fileID: 1418119552116151494, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 3563429938413632556, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
       propertyPath: scoreText
       value: 
@@ -2163,47 +2152,9 @@ PrefabInstance:
       propertyPath: terrainGenerator
       value: 
       objectReference: {fileID: 833461185}
-    - target: {fileID: 4389736519940765213, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4712649752242785988, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 5542021407807059915, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-<<<<<<< HEAD
-    - target: {fileID: 5542021407807059915, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
-      propertyPath: m_Layer
-      value: 6
-=======
-    - target: {fileID: 8791363378270428207, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
-      propertyPath: m_Size.x
-      value: 1.6323371
-      objectReference: {fileID: 0}
-    - target: {fileID: 8791363378270428207, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
-      propertyPath: m_Size.y
-      value: 2.0373185
-      objectReference: {fileID: 0}
-    - target: {fileID: 8791363378270428207, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
-      propertyPath: m_Size.z
-      value: 1.1225922
-      objectReference: {fileID: 0}
-    - target: {fileID: 8791363378270428207, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
-      propertyPath: m_Center.x
-      value: 0.05060454
-      objectReference: {fileID: 0}
-    - target: {fileID: 8791363378270428207, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
-      propertyPath: m_Center.y
-      value: 0.48683167
-      objectReference: {fileID: 0}
-    - target: {fileID: 8791363378270428207, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
-      propertyPath: m_Center.z
-      value: -0.08705179
->>>>>>> origin/Oumaima
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2276,7 +2227,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3563429938413632556, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
   m_PrefabInstance: {fileID: 2834001385029392286}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673225307}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8f90dd547b0b794b87e04edf373781c, type: 3}
