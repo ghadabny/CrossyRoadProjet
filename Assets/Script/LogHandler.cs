@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class LogHandler : MonoBehaviour
 {
+    /*
     public float timeToStayOnLog = 50f; // Time in seconds the player will stay on the log
 
     private void OnTriggerEnter(Collider collider)
@@ -65,7 +66,7 @@ public class LogHandler : MonoBehaviour
             player.IsOnLog = false;
             Debug.Log("Player detached from the log.");
         }
-    }
+    }*/
 
 
 }

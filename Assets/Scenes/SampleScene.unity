@@ -2368,7 +2368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 111129694088683734, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 111129694088683734, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2475,6 +2475,18 @@ PrefabInstance:
       propertyPath: terrainHolder
       value: 
       objectReference: {fileID: 831841092}
+    - target: {fileID: 8848028560335018187, guid: 19065d077d6efaf4185028d55ad105de, type: 3}
+      propertyPath: terrainDatasInit.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8848028560335018187, guid: 19065d077d6efaf4185028d55ad105de, type: 3}
+      propertyPath: terrainDatasInit.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 462225de22d19064a909ae17fb825863, type: 2}
+    - target: {fileID: 8848028560335018187, guid: 19065d077d6efaf4185028d55ad105de, type: 3}
+      propertyPath: terrainDatasInit.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 462225de22d19064a909ae17fb825863, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

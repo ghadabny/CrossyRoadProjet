@@ -8,11 +8,11 @@ public class Player : MonoBehaviour
     [SerializeField] private Text scoreText;
     public MovingObject CurrentLog { get; set; }
     public GameObject specificCoin;
-    public bool IsOnLog { get; set; }
 
     private Animator animator;
     private Rigidbody rb;
     public bool isHopping;
+    private bool isAttachedToLog;
 
     private Vector3 lastPosition;
     private float movementThreshold = 2; // Threshold distance to consider significant movement
@@ -79,12 +79,6 @@ public class Player : MonoBehaviour
         // Check if the new position will collide with a tree
         if (!WillCollideWithTree(newPosition))
         {
-            if (IsOnLog)
-            {
-                // Detach from the log immediately
-                transform.parent = null;
-                IsOnLog = false;
-            }
             MoveToPosition(newPosition, rotation);
         }
         else
@@ -112,6 +106,10 @@ public class Player : MonoBehaviour
     {
         animator.SetTrigger("hop");
         isHopping = true;
+        if (isAttachedToLog)
+        {
+            DetachFromLog();
+        }
         StartCoroutine(MoveAndHandleHop(position, rotation));
     }
 
@@ -142,13 +140,17 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collision detected with " + collision.collider.name);
+
         MovingObject movingObject = collision.collider.GetComponent<MovingObject>();
         if (movingObject != null && movingObject.isLog)
         {
-            transform.SetParent(movingObject.transform);
-            CurrentLog = movingObject;
-            IsOnLog = true;
+            AttachToLog(collision.collider.transform);
             Debug.Log("Player attached to log");
+        }
+        else if (collision.gameObject.CompareTag("CrossyCoin"))
+        {
+            CollectCoin(collision.gameObject);
         }
     }
 
@@ -157,10 +159,48 @@ public class Player : MonoBehaviour
         MovingObject movingObject = collision.collider.GetComponent<MovingObject>();
         if (movingObject != null && movingObject.isLog)
         {
-            transform.SetParent(null);
-            CurrentLog = null;
-            IsOnLog = false;
+            DetachFromLog();
             Debug.Log("Player detached from log");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Trigger with: " + other.gameObject.name);
+        if (other.CompareTag("CrossyCoin"))
+        {
+            CollectCoin(other.gameObject);
+        }
+    }
+
+    private void CollectCoin(GameObject coin)
+    {
+        Debug.Log("Collecting and destroying coin: " + coin.name);
+        Destroy(coin);
+        ScoreManager.instance.AddCoins(1);
+    }
+
+    private void AttachToLog(Transform logTransform)
+    {
+        CurrentLog = logTransform.GetComponent<MovingObject>();
+        isAttachedToLog = true;
+        StartCoroutine(FollowLog());
+    }
+
+    private void DetachFromLog()
+    {
+        isAttachedToLog = false;
+        CurrentLog = null;
+        transform.parent = null; // Detach from the log's transform
+    }
+
+    private IEnumerator FollowLog()
+    {
+        while (isAttachedToLog && CurrentLog != null)
+        {
+            Vector3 logPosition = CurrentLog.transform.position;
+            transform.position = new Vector3(logPosition.x, transform.position.y, logPosition.z);
+            yield return null;  // Wait for the next frame
         }
     }
 }
