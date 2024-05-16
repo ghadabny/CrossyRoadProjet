@@ -1,22 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] AudioSource music;
 
-    public Button btn;
-    public GameObject SonOn;
-    public GameObject SonOff;
     public bool muted = false;
-
 
     public void Play()
     {
+        // Save the muted state in PlayerPrefs before loading the next scene
+        PlayerPrefs.SetInt("Muted", muted ? 1 : 0);
+        PlayerPrefs.Save();
+
+        // Load the next scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //SceneManager.LoadScene("GameScene");
     }
 
     public void Quit()
@@ -24,96 +24,45 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
         Debug.Log("Le joueur a quitté le jeu");
     }
-/*
-    public AudioSource audioSource;
+
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        PlayMusic();
+        BackgroundMusic();
+    }
+
+    void Update()
+    {
+
     }
 
     public void PlayMusic()
     {
-        if (!audioSource.isPlaying)
-        {
-            audioSource.Play();
-        }
+        music.Play();
+        muted = false;
     }
 
     public void StopMusic()
     {
-        if (audioSource.isPlaying)
-        {
-            audioSource.Stop();
-        }
-    }
-
-
-/*
-    public void OnButton()
-    {
-        muted = false;
-        SonOn.SetActive(true);
-        SonOff.SetActive(false);
-
-        Save();
-    }
-
-    public void OffButton()
-    {
+        music.Stop();
         muted = true;
-        SonOn.SetActive(false);
-        SonOff.SetActive(true);
-
-        Save();
     }
 
-    private void Load()
+    public void BackgroundMusic()
     {
-        muted = PlayerPrefs.GetInt("muted") == 1;
-    }
-
-    private void Save()
-    {
-        PlayerPrefs.SetInt("muted", muted ? 1 : 0);
-    }
-*/
-/*
-    public void Song()
-    {
-        if(muted= PlayerPrefs.GetInt("muted") == 1)
+        if (muted == true)
         {
-            music.GetComponent<AudioSource>().enabled = false;
+            StopMusic();
         }
         else
         {
-            music.GetComponent<AudioSource>().enabled = true;
+            PlayMusic();
         }
     }
-    void Start()
+
+    // Method to toggle music state from the UI
+    public void ToggleMute()
     {
-        btn = GameObject.Find("SonOn")?.GetComponent<Button>();
-        btn.onClick.AddListener(Song);
-            
-        //Load();
-        if(muted = PlayerPrefs.GetInt("muted") == 1)
-        {
-            SonOff.SetActive(true);
-            SonOn.SetActive(false);
-        }else{
-            SonOn.SetActive(true);
-            SonOff.SetActive(false);
-        }
-
-        if(muted= PlayerPrefs.GetInt("muted") == 1)
-        {
-            music.GetComponent<AudioSource>().enabled = false;
-        }
-        else
-        {
-            music.GetComponent<AudioSource>().enabled = true;
-        }
-
+        muted = !muted;
+        BackgroundMusic();
     }
-*/
 }
