@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -7,8 +8,10 @@ public class ScoreManager : MonoBehaviour
     public Text scoreText; 
     public Text coinText;  
 
-    private int score = 0;
-    private int coins = 0;
+    public static int score = 0; // was private
+    public static int coins = 0; // was private
+
+    //public LeaderBoardData LBData; // Added
 
     void Awake()
     {
@@ -64,7 +67,19 @@ public class ScoreManager : MonoBehaviour
             Debug.LogError("CoinText component not found!");
     }
 
-    private void UpdateUI()
+    /*public static void SaveRoundData(float elapsedTime, int score, int coins) // Added
+    {
+        LeaderBoardData LBData = instance.LBData;
+        RoundData round = new RoundData();
+        round.elapsedTime = elapsedTime;
+        round.score = score;
+        round.coins = coins;
+        LBData.rounds.Add(round);
+        UnityEditor.EditorUtility.SetDirty(LBData);
+        Debug.LogError("SaveRoundData done: " + round);
+    }*/
+
+private void UpdateUI()
     {
         UpdateScoreText();
         UpdateCoinText();
