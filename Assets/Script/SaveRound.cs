@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using System;
+using TMPro;
 
 public class SaveRound
 {
@@ -15,6 +18,7 @@ public class SaveRound
         string path = Application.persistentDataPath + "/roundData.json";
 
         List<RoundData> rounds = new List<RoundData>();
+        
 
         if (File.Exists(path))
         {
@@ -61,4 +65,42 @@ public class SaveRound
         //Debug.Log("Round data saved: " + newRound);
         //Debug.Log("Persistent Data Path: " + Application.persistentDataPath);
     }
+
+
+    public static void SortRoundData()
+    {
+        // Sort
+        //RoundData newRound = new RoundData(score, coins, elapsedTime);
+        //List<RoundData> roundsUnsorted = new List<RoundData>();
+        string path = Application.persistentDataPath + "/roundData.json";
+        string pathSortedRoundsData = Application.persistentDataPath + "/sortedRoundData.json";
+
+        string jsonUnsorted = File.ReadAllText(path);
+        // Here put a regex here to extract the first one
+        Debug.Log("jsonUnsorted 1 : " + jsonUnsorted);
+        string jsonSorted = File.ReadAllText(pathSortedRoundsData);
+        List<RoundData> roundsUnsorted1 = JsonConvert.DeserializeObject<List<RoundData>>(jsonSorted);
+        //Debug.Log("roundsUnsorted1 : " + roundsUnsorted1);
+
+        List<RoundData> rounds = new List<RoundData>();
+        rounds = JsonUtility.FromJson<RoundDataList>(jsonUnsorted).rounds;
+        foreach ( RoundData ent in rounds ) 
+         {
+            List<RoundData> roundsUnsorted = JsonConvert.DeserializeObject<List<RoundData>>(jsonUnsorted);
+            //List<RoundData> roundsUnsorted = JsonConvert.DeserializeObject<List<RoundData>>(ent);
+            roundsUnsorted.Sort((x, y) => y.score.CompareTo(x.score));
+            string sortedJson = JsonConvert.SerializeObject(roundsUnsorted, Formatting.Indented);
+            File.WriteAllText(pathSortedRoundsData, sortedJson);
+            Debug.Log("Sorted file done");
+         }
+
+
+
+        Debug.Log("SortRoundData Done");
+    }
 }
+
+
+/* How can I achieve what I want? 
+ * First I coudl try and from the begining sort them.*/
+

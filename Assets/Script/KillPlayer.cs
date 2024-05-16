@@ -17,7 +17,10 @@ public class NewBehaviourScript : MonoBehaviour
             //int score = ScoreManager.score; // Added
             //int coins = ScoreManager.coins; // Added
             //Debug.LogError("PT: " + elapsedTime + " score: " + score + " coins: " + coins); So these work
-            SaveRound.SaveRoundData();
+            //SaveRound.SaveRoundData();
+            //SaveRound.SortRoundData();
+            //Save.saveScores();
+            //Save.sortScores();
             SceneManager.LoadScene("GameOver");
             //ScoreManager.SaveRoundData(elapsedTime, score, coins); // Added This on the other hand causes issues
             //Debug.LogError("Round Saved."); // Added
