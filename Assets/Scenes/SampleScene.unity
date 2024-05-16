@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 424447058}
   - component: {fileID: 424447057}
   m_Layer: 5
-  m_Name: SettingsBtn
+  m_Name: StartBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -228,7 +228,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1639, y: -338}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &424447057
 MonoBehaviour:
@@ -273,7 +273,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 424447058}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1287046932}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &424447058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,7 +661,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &743655773
 RectTransform:
   m_ObjectHideFlags: 0
@@ -745,7 +757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0c64fbe47547f4f96c136a553321dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 1287046932}
+  pauseMenuUI: {fileID: 0}
 --- !u!1 &831841091
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +837,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 866, y: -343}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &932976165
 MonoBehaviour:
@@ -1286,7 +1298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1287046933
 Transform:
   m_ObjectHideFlags: 0
@@ -1317,7 +1329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0c64fbe47547f4f96c136a553321dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 743655772}
+  pauseMenuUI: {fileID: 0}
 --- !u!114 &1287046935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1656,7 +1668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0c64fbe47547f4f96c136a553321dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 1287046932}
+  pauseMenuUI: {fileID: 0}
 --- !u!1 &1550145492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,7 +1939,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Param\xE8tres"
+  m_text: Recommencer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dae2ca4bc2c528f438edaf9347871fbd, type: 2}
   m_sharedMaterial: {fileID: -9015893063215859292, guid: dae2ca4bc2c528f438edaf9347871fbd, type: 2}
@@ -2143,6 +2155,30 @@ PrefabInstance:
     - target: {fileID: 5542021407807059915, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791363378270428207, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6323371
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791363378270428207, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
+      propertyPath: m_Size.y
+      value: 2.0373185
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791363378270428207, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
+      propertyPath: m_Size.z
+      value: 1.1225922
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791363378270428207, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
+      propertyPath: m_Center.x
+      value: 0.05060454
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791363378270428207, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
+      propertyPath: m_Center.y
+      value: 0.48683167
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791363378270428207, guid: 93718667acaaee34ba3faccb05aea561, type: 3}
+      propertyPath: m_Center.z
+      value: -0.08705179
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
