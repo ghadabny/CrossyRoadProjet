@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 2698125039339348622, guid: e3ebb912284e3ab4db31d4d5f90dc8f9, type: 3}
-  numberOfCoins: 2
+  numberOfCoins: 1
 --- !u!64 &-4094402980152477594
 MeshCollider:
   m_ObjectHideFlags: 0

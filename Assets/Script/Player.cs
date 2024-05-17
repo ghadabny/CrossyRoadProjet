@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
     public bool isHopping;
     private bool isAttachedToLog;
+    private bool isMovementDisabled = false;  // Flag to disable movement
 
     private Vector3 lastPosition;
     private float movementThreshold = 2; // Threshold distance to consider significant movement
@@ -31,6 +32,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (isMovementDisabled) return;  // Do not allow movement if disabled
+
         if (Time.time - lastCheckTime >= checkInterval)
         {
             lastCheckTime = Time.time;
@@ -39,25 +42,25 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && !isHopping)
         {
-            TryMove(Vector3.right, Vector3.zero);
+            TryMove(Vector3.right, Quaternion.Euler(0, 0, 0));
             ScoreManager.instance.AddScore(1);
             ResetBackStepsCount();
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHopping)
         {
-            TryMove(Vector3.forward + new Vector3(0, 0, CalculateZDifference()), new Vector3(0, -90, 0));
+            TryMove(Vector3.forward + new Vector3(0, 0, CalculateZDifference()), Quaternion.Euler(0, -90, 0));
             ResetBackStepsCount();
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHopping)
         {
-            TryMove(-Vector3.forward + new Vector3(0, 0, CalculateZDifference()), new Vector3(0, 90, 0));
+            TryMove(-Vector3.forward + new Vector3(0, 0, CalculateZDifference()), Quaternion.Euler(0, 90, 0));
             ResetBackStepsCount();
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHopping)
         {
             if (backStepsCount < maxBackSteps)
             {
-                TryMove(Vector3.left, new Vector3(0, 180, 0));
+                TryMove(Vector3.left, Quaternion.Euler(0, 180, 0));
                 backStepsCount++;
             }
             else
@@ -72,7 +75,7 @@ public class Player : MonoBehaviour
         return Mathf.Round(transform.position.z) - transform.position.z;
     }
 
-    private void TryMove(Vector3 direction, Vector3 rotation)
+    private void TryMove(Vector3 direction, Quaternion rotation)
     {
         Vector3 newPosition = transform.position + direction;
 
@@ -102,7 +105,7 @@ public class Player : MonoBehaviour
         return false;
     }
 
-    private void MoveToPosition(Vector3 position, Vector3 rotation)
+    private void MoveToPosition(Vector3 position, Quaternion rotation)
     {
         animator.SetTrigger("hop");
         isHopping = true;
@@ -113,11 +116,11 @@ public class Player : MonoBehaviour
         StartCoroutine(MoveAndHandleHop(position, rotation));
     }
 
-    IEnumerator MoveAndHandleHop(Vector3 newPosition, Vector3 newRotation)
+    IEnumerator MoveAndHandleHop(Vector3 newPosition, Quaternion newRotation)
     {
-        transform.rotation = Quaternion.Euler(newRotation);
         yield return null;  // Ensure we have a frame to detach from the parent before moving
         rb.MovePosition(newPosition);
+        rb.MoveRotation(newRotation);
         terrainGenerator.SpawnTerrain(false, newPosition);
         yield return new WaitForSeconds(0.1f);  // Reduced delay for faster response
         isHopping = false;
@@ -202,5 +205,15 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(logPosition.x, transform.position.y, logPosition.z);
             yield return null;  // Wait for the next frame
         }
+    }
+
+    public void DisableMovement()
+    {
+        isMovementDisabled = true;
+    }
+
+    public void EnableMovement()
+    {
+        isMovementDisabled = false;
     }
 }

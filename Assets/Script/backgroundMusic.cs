@@ -11,6 +11,9 @@ public class BackgroundMusic : MonoBehaviour
         // Retrieve the muted state from PlayerPrefs
         bool muted = PlayerPrefs.GetInt("Muted", 0) == 1;
 
+        // Apply the global mute state
+        ApplyMuteState(muted);
+
         // Control the background music based on the muted state
         if (muted)
         {
@@ -20,5 +23,10 @@ public class BackgroundMusic : MonoBehaviour
         {
             music.Play();
         }
+    }
+
+    private void ApplyMuteState(bool muted)
+    {
+        AudioListener.volume = muted ? 0 : 1;
     }
 }
