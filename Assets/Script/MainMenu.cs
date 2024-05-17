@@ -27,7 +27,10 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        // Load the muted state from PlayerPrefs
+        muted = PlayerPrefs.GetInt("Muted", 0) == 1;
         BackgroundMusic();
+        ApplyMuteState();
     }
 
     void Update()
@@ -39,17 +42,19 @@ public class MainMenu : MonoBehaviour
     {
         music.Play();
         muted = false;
+        ApplyMuteState();
     }
 
     public void StopMusic()
     {
         music.Stop();
         muted = true;
+        ApplyMuteState();
     }
 
     public void BackgroundMusic()
     {
-        if (muted == true)
+        if (muted)
         {
             StopMusic();
         }
@@ -64,5 +69,14 @@ public class MainMenu : MonoBehaviour
     {
         muted = !muted;
         BackgroundMusic();
+
+        // Save the muted state in PlayerPrefs
+        PlayerPrefs.SetInt("Muted", muted ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    private void ApplyMuteState()
+    {
+        AudioListener.volume = muted ? 0 : 1;
     }
 }

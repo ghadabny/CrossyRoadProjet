@@ -1,34 +1,49 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
-    public Text scoreText; 
-    public Text coinText;  
+    public Text scoreText;
+    public Text coinText;
 
-    public static int score = 0; // was private
-    public static int coins = 0; // was private
+    public static int score = 0;
+    public static int coins = 0;
 
-    //public LeaderBoardData LBData; // Added
+    public AudioClip coinSound; // Assign the coin sound in the inspector
+    public AudioClip milestoneSound; // Assign the milestone sound in the inspector
+    private AudioSource audioSource;
 
     void Awake()
     {
-       
         if (instance == null)
         {
             instance = this;
+            audioSource = GetComponent<AudioSource>(); // Get the AudioSource component
+
+            if (audioSource == null)
+            {
+                Debug.LogError("AudioSource component not found on the GameObject.");
+            }
+
+            if (coinSound == null)
+            {
+                Debug.LogError("coinSound AudioClip not assigned in the inspector.");
+            }
+
+            if (milestoneSound == null)
+            {
+                Debug.LogError("milestoneSound AudioClip not assigned in the inspector.");
+            }
         }
         else if (instance != this)
         {
-            Destroy(gameObject); 
+            Destroy(gameObject);
         }
     }
 
     void Start()
     {
-       
         ResetScores();
     }
 
@@ -36,19 +51,41 @@ public class ScoreManager : MonoBehaviour
     {
         score = 0;
         coins = 0;
-        UpdateUI(); 
+        UpdateUI();
     }
 
     public void AddScore(int amount)
     {
         score += amount;
-        UpdateScoreText(); 
+
+        // Play milestone sound every 20 points
+        if (score % 15 == 0 && score != 0)
+        {
+            if (audioSource != null && milestoneSound != null)
+            {
+                audioSource.PlayOneShot(milestoneSound);
+            }
+            else
+            {
+                Debug.LogWarning("AudioSource or milestoneSound not set!");
+            }
+        }
+
+        UpdateScoreText();
     }
 
     public void AddCoins(int amount)
     {
         coins += amount;
-        UpdateCoinText(); 
+        if (audioSource != null && coinSound != null)
+        {
+            audioSource.PlayOneShot(coinSound); // Play the coin sound
+        }
+        else
+        {
+            Debug.LogWarning("AudioSource or coinSound not set!");
+        }
+        UpdateCoinText();
     }
 
     private void UpdateScoreText()
@@ -67,19 +104,7 @@ public class ScoreManager : MonoBehaviour
             Debug.LogError("CoinText component not found!");
     }
 
-    /*public static void SaveRoundData(float elapsedTime, int score, int coins) // Added
-    {
-        LeaderBoardData LBData = instance.LBData;
-        RoundData round = new RoundData();
-        round.elapsedTime = elapsedTime;
-        round.score = score;
-        round.coins = coins;
-        LBData.rounds.Add(round);
-        UnityEditor.EditorUtility.SetDirty(LBData);
-        Debug.LogError("SaveRoundData done: " + round);
-    }*/
-
-private void UpdateUI()
+    private void UpdateUI()
     {
         UpdateScoreText();
         UpdateCoinText();
