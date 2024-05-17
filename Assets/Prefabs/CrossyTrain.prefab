@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7336550755581223666}
   - component: {fileID: 6681293996216409450}
   - component: {fileID: 8064814006506449043}
-  - component: {fileID: 4388089596243021556}
+  - component: {fileID: -5458831055865402015}
   m_Layer: 0
   m_Name: CrossyTrain
   m_TagString: CrossyTrain
@@ -102,7 +102,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.87761307, y: 1.8688086, z: 19.430542}
   m_Center: {x: 0.09841919, y: 0.7707167, z: 11.663687}
---- !u!114 &4388089596243021556
+--- !u!114 &-5458831055865402015
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

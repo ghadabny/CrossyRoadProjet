@@ -275,7 +275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &129409366
 RectTransform:
   m_ObjectHideFlags: 0
@@ -376,6 +376,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 681772850}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: ToggleMute
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &129409368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,7 +408,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d79f879d80053f74483c33dca2994652, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b1ef69861a9829647b3bef110a79a467, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -919,9 +931,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a1fa52e50c98c034188b30c9cf800011, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7fbf250c9b62b59468207f30866afccd, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.541
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2540,7 +2552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2085480482
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2643,7 +2655,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 681772850}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: BackgroundMusic
+        m_MethodName: ToggleMute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2673,7 +2685,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b1ef69861a9829647b3bef110a79a467, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d79f879d80053f74483c33dca2994652, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

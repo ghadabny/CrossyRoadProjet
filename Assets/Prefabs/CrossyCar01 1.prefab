@@ -62,9 +62,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 96b22d431008b6b458abf2afd78f22e8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 521377280634799446}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 96b22d431008b6b458abf2afd78f22e8, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1585613270598160169}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 96b22d431008b6b458abf2afd78f22e8, type: 3}
       insertIndex: -1
@@ -72,24 +69,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 96b22d431008b6b458abf2afd78f22e8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2142349532062790409}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 96b22d431008b6b458abf2afd78f22e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3717006551502755763}
   m_SourcePrefab: {fileID: 100100000, guid: 96b22d431008b6b458abf2afd78f22e8, type: 3}
 --- !u!1 &5586872175867826344 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 96b22d431008b6b458abf2afd78f22e8, type: 3}
   m_PrefabInstance: {fileID: 4704545777006980601}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &521377280634799446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5586872175867826344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb3f5ae67f47dd4cbc06f2983316c15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1585613270598160169
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -123,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3b2f42f48d79c4e9646d734f7d00d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 7
   isLog: 0
 --- !u!54 &2142349532062790409
 Rigidbody:
@@ -152,3 +140,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &3717006551502755763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5586872175867826344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb3f5ae67f47dd4cbc06f2983316c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

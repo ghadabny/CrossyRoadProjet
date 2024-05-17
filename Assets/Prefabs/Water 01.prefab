@@ -78,8 +78,8 @@ GameObject:
   - component: {fileID: 8107683001092218052}
   - component: {fileID: 4025931542428068227}
   - component: {fileID: 474017227555095810}
-  - component: {fileID: 8667796766788020072}
   - component: {fileID: 1994551137057955404}
+  - component: {fileID: 1890466142088429047}
   m_Layer: 0
   m_Name: Water 01
   m_TagString: Untagged
@@ -176,18 +176,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8667796766788020072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2871309000244135155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb3f5ae67f47dd4cbc06f2983316c15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1994551137057955404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,10 +190,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingObjectPrefabs:
   - {fileID: 5367163971576993921, guid: cd96f881dfa3e57499ddc000c32097c9, type: 3}
+  - {fileID: 5367163971576993921, guid: cd96f881dfa3e57499ddc000c32097c9, type: 3}
+  - {fileID: 5367163971576993921, guid: cd96f881dfa3e57499ddc000c32097c9, type: 3}
   spawnPos: {fileID: 2145662762540860320}
-  minSeperationTime: 1
+  minSeperationTime: 0.5
   maxSeperationTime: 1
   isRightSide: 0
+  warningSound: {fileID: 0}
+--- !u!114 &1890466142088429047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871309000244135155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb3f5ae67f47dd4cbc06f2983316c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2969997685409377948
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,15 +1,16 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
+using System;
 
 public class LeaderBoardLoader : MonoBehaviour
 {
-    public static string inputPath = "Assets/ScoreData.txt";
-    public static string outputPath = "Assets/SortedScoreData.txt";
+    /*public static string unsortedPath = "Assets/Script/ScoreData.txt";
+    public static string sortedPath = "Assets/Script/SortedScoreData.txt";
     public static string highestScore;
     public static void HighestScore()
     {
-        string[] lines = File.ReadAllLines(inputPath);
+        string[] lines = File.ReadAllLines(unsortedPath);
         List<string> scores = new List<string>();
 
         foreach (string line in lines)
@@ -31,20 +32,73 @@ public class LeaderBoardLoader : MonoBehaviour
                 Debug.LogWarning("Failed to parse score: " + score);
             }
         }
-        scores.Sort((a, b) => b.CompareTo(a));
+        intScores.Sort((a, b) => b.CompareTo(a));
 
-        highestScore = scores[0];
+        highestScore = intScores[0].ToString();
 
-        using (StreamWriter writer = new StreamWriter(outputPath))
+        using (StreamWriter writer = new StreamWriter(sortedPath))
         {
             foreach (string score in scores)
             {
-                writer.WriteLine(score.ToString());
+                writer.WriteLine(intScores.ToString());
             }
         }
 
-        Debug.Log("Scores sorted and saved. The highest score is: "+ highestScore);
+        Debug.Log("Scores sorted and saved. The highest score is: " + highestScore);
     }
-    
 
+    public static List<string> MakeLeaderboard()
+    {
+        List<string> topFive = new List<string>();
+
+        string[] sortedScores = File.ReadAllLines(sortedPath);
+
+        using (StreamReader unsortedScores = new StreamReader(unsortedPath))
+        {
+            string line;
+            while ((line = unsortedScores.ReadLine()) != null)
+            {
+                string[] parts = line.Split(',');
+
+                for (int i = 0; i < 5; i++)
+                //foreach (string sortedScore in sortedScores) // here add a range
+                {
+                    if (parts[0] == sortedScores[0])
+                    {
+                        topFive[0] = line;
+                        break;
+                    }
+
+                    if (parts[0] == sortedScores[1])
+                    {
+                        topFive[1] = line;
+                        break;
+                    }
+
+                    if (parts[0] == sortedScores[2])
+                    {
+                        topFive[2] = line;
+                        break;
+                    }
+
+                    if (parts[0] == sortedScores[3])
+                    {
+                        topFive[3] = line;
+                        break;
+                    }
+
+                    if (parts[0] == sortedScores[4])
+                    {
+                        topFive[4] = line;
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        return topFive;
+    }*/
 }
+
+

@@ -31,8 +31,8 @@ public class DisplayScores : MonoBehaviour
     {
         UpdateScoreText();
         UpdateCoinText();
-        UpdateTimerText();
-        UpdateHighScoreText();
+        //UpdateTimerText();
+        //UpdateHighScoreText();
     }
 
     private void UpdateScoreText()
@@ -51,20 +51,20 @@ public class DisplayScores : MonoBehaviour
             Debug.LogError("coinText component not found!");
     }
 
-    private void UpdateTimerText()
+   /* private void UpdateTimerText()
     {
         if (timerText != null)
             timerText.text = "Play Time:" + TimeFormatter.FormatTime(PlayTime.elapsedTime);
         else
             Debug.LogError("timerText component not found!");
-    }
+    }*/
 
-    private void UpdateHighScoreText()
+    /*private void UpdateHighScoreText()
     {
         if (highScoreText != null)
             highScoreText.text = "Highest Score: " + LeaderBoardLoader.highestScore;
         else
             Debug.LogError("highScoreText component not found!");
-    }
+    }*/
 
 }

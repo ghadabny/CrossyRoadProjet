@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Timeline;
 
-public class NewBehaviourScript : MonoBehaviour
+public class KillPlayer : MonoBehaviour
 {
     //public ScoreManager scoreManager;
 
@@ -13,7 +13,7 @@ public class NewBehaviourScript : MonoBehaviour
         if (collision.collider.GetComponent<Player>() != null) 
         {
             Destroy(collision.gameObject);
-            float elapsedTime = PlayTime.elapsedTime; // Added 
+            //float elapsedTime = PlayTime.elapsedTime; // Added 
             //int score = ScoreManager.score; // Added
             //int coins = ScoreManager.coins; // Added
             //Debug.LogError("PT: " + elapsedTime + " score: " + score + " coins: " + coins); So these work
@@ -21,8 +21,9 @@ public class NewBehaviourScript : MonoBehaviour
             //SaveRound.SortRoundData();
             //Save.saveScores();
             //Save.sortScores();
-            SaveRound.SaveRoundData();
-            LeaderBoardLoader.HighestScore();
+            //SaveRound.SaveRoundData();
+            //LeaderBoardLoader.HighestScore();
+           // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             SceneManager.LoadScene("GameOver");
             //ScoreManager.SaveRoundData(elapsedTime, score, coins); // Added This on the other hand causes issues
             //Debug.LogError("Round Saved."); // Added
